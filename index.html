@@ -924,3 +924,58 @@ colors.forEach(color => {
     </script>
 </body>
 </html>
+<!-- 在您现有页面的footer之前添加这个导航部分 -->
+<div class="navigation">
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="goToNextPage()">
+            <i class="fas fa-arrow-right"></i> 下一页
+        </button>
+        <button class="nav-btn" onclick="goToExternalSite()">
+            <i class="fas fa-external-link-alt"></i> 访问外部网站
+        </button>
+    </div>
+</div>
+
+<style>
+.navigation {
+    text-align: center;
+    margin: 40px 0;
+    padding: 20px;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+</style>
+
+<script>
+function goToNextPage() {
+    window.location.href = 'wmicft-prog.github.io';
+}
+
+function goToExternalSite() {
+    window.open('https://www.example.com', '_blank');
+}
+</script>
