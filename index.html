@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript & JSON 基本格式学习</title>
+    <title>Java和C++表格编辑器</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,7 +14,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             color: #333;
             line-height: 1.6;
             padding: 20px;
@@ -22,7 +22,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
         
@@ -30,7 +30,7 @@
             text-align: center;
             margin-bottom: 30px;
             padding: 25px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
@@ -38,7 +38,7 @@
         h1 {
             font-size: 2.8rem;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -47,6 +47,27 @@
             font-size: 1.3rem;
             color: #555;
             margin-bottom: 20px;
+        }
+        
+        .language-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        
+        .tab {
+            padding: 12px 25px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            color: white;
         }
         
         .content {
@@ -73,7 +94,7 @@
         .card-title {
             font-size: 1.6rem;
             margin-bottom: 20px;
-            color: #6e8efb;
+            color: #1a2a6c;
             border-bottom: 2px solid #f0f0f0;
             padding-bottom: 10px;
             display: flex;
@@ -92,7 +113,6 @@
             overflow-x: auto;
             margin: 18px 0;
             tab-size: 4;
-            position: relative;
         }
         
         .code-header {
@@ -120,10 +140,6 @@
             color: #f92672;
         }
         
-        .function {
-            color: #66d9ef;
-        }
-        
         .string {
             color: #a6e22e;
         }
@@ -136,29 +152,41 @@
             color: #fd971f;
         }
         
-        .property {
-            color: #66d9ef;
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
         }
         
-        .output {
-            background: #f8f9fa;
-            padding: 18px;
-            border-radius: 8px;
-            margin: 18px 0;
-            min-height: 100px;
-            border-left: 4px solid #6e8efb;
-            font-family: monospace;
-            white-space: pre-wrap;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #1a2a6c;
+            color: white;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
         }
         
         .btn-container {
             display: flex;
             gap: 12px;
             margin: 15px 0;
+            flex-wrap: wrap;
         }
         
         button {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
             color: white;
             border: none;
             padding: 12px 22px;
@@ -187,33 +215,38 @@
             background: linear-gradient(135deg, #f44336, #c62828);
         }
         
-        .btn-json {
+        .btn-add {
             background: linear-gradient(135deg, #ff9800, #f57c00);
         }
         
-        .explanation {
-            margin: 18px 0;
+        .btn-delete {
+            background: linear-gradient(135deg, #f44336, #c62828);
+        }
+        
+        .editor-container {
+            margin: 20px 0;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 200px;
             padding: 15px;
-            background: #f0f4ff;
             border-radius: 8px;
-            border-left: 4px solid #a777e3;
+            font-family: 'Fira Code', monospace;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            resize: vertical;
         }
         
-        .example {
-            margin: 22px 0;
-            padding-bottom: 20px;
-            border-bottom: 1px dashed #e0e0e0;
-        }
-        
-        .example:last-child {
-            border-bottom: none;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
+        .output {
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+            min-height: 100px;
+            border-left: 4px solid #1a2a6c;
+            font-family: monospace;
+            white-space: pre-wrap;
         }
         
         .features {
@@ -236,18 +269,31 @@
         .feature i {
             font-size: 2.5rem;
             margin-bottom: 15px;
-            color: #a777e3;
+            color: #fdbb2d;
         }
         
-        .json-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
         }
         
-        .json-example {
-            flex: 1;
-            min-width: 300px;
+        .input-group {
+            margin: 15px 0;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
         }
         
         @media (max-width: 768px) {
@@ -263,7 +309,7 @@
                 font-size: 1.1rem;
             }
             
-            .json-container {
+            .language-tabs {
                 flex-direction: column;
             }
         }
@@ -272,659 +318,364 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fab fa-js"></i> JavaScript & JSON 基本格式</h1>
-            <p class="subtitle">学习JavaScript和JSON的基本语法、结构和核心概念</p>
+            <h1><i class="fas fa-table"></i> Java和C++表格编辑器</h1>
+            <p class="subtitle">创建、编辑和运行Java与C++代码示例</p>
+            
+            <div class="language-tabs">
+                <div class="tab active" onclick="showLanguage('java')">Java</div>
+                <div class="tab" onclick="showLanguage('cpp')">C++</div>
+            </div>
             
             <div class="features">
                 <div class="feature">
+                    <i class="fab fa-java"></i>
+                    <h3>Java代码</h3>
+                    <p>面向对象编程</p>
+                </div>
+                <div class="feature">
                     <i class="fas fa-code"></i>
-                    <h3>现代语法</h3>
-                    <p>ES6+ 新特性</p>
+                    <h3>C++代码</h3>
+                    <p>高性能编程</p>
                 </div>
                 <div class="feature">
-                    <i class="fas fa-play-circle"></i>
-                    <h3>实时运行</h3>
-                    <p>查看代码执行结果</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-file-code"></i>
-                    <h3>JSON支持</h3>
-                    <p>数据交换格式</p>
+                    <i class="fas fa-table"></i>
+                    <h3>数据表格</h3>
+                    <p>可视化数据</p>
                 </div>
             </div>
         </header>
         
         <div class="content">
             <div class="card">
-                <h2 class="card-title"><i class="fas fa-code"></i> JavaScript 基本结构</h2>
+                <h2 class="card-title"><i class="fab fa-java"></i> Java 代码编辑器</h2>
                 
-                <div class="example">
-                    <h3><i class="fas fa-variable"></i> 变量声明</h3>
+                <div class="editor-container">
                     <div class="code-header">
-                        <span>变量声明示例</span>
-                        <button class="btn-run" onclick="runVariableExample()"><i class="fas fa-play"></i> 运行</button>
+                        <span>Java代码示例</span>
+                        <button class="btn-run" onclick="runJavaCode()"><i class="fas fa-play"></i> 运行Java代码</button>
                     </div>
-                    <pre><code><span class="comment">// 变量声明</span>
-<span class="keyword">var</span> oldVariable = <span class="string">"使用var声明（旧方式）"</span>;
-<span class="keyword">let</span> changeableVariable = <span class="string">"使用let声明（可更改）"</span>;
-<span class="keyword">const</span> constantVariable = <span class="string">"使用const声明（常量）"</span>;
+                    <textarea id="javaCode" placeholder="// 在这里编写Java代码&#10;public class Main {&#10;    public static void main(String[] args) {&#10;        System.out.println(&quot;Hello, Java!&quot;);&#10;    }&#10;}">import java.util.ArrayList;
+import java.util.List;
 
-<span class="comment">// 尝试更改常量（会导致错误）</span>
-<span class="comment">// constantVariable = "新值"; // TypeError: Assignment to constant variable</span></code></pre>
-                    <div id="variableOutput" class="output">点击"运行"按钮查看结果</div>
-                </div>
-                
-                <div class="example">
-                    <h3><i class="fas fa-cube"></i> 数据类型</h3>
-                    <div class="code-header">
-                        <span>数据类型示例</span>
-                        <button class="btn-run" onclick="runDataTypeExample()"><i class="fas fa-play"></i> 运行</button>
-                    </div>
-                    <pre><code><span class="comment">// 基本数据类型</span>
-<span class="keyword">let</span> name = <span class="string">"张三"</span>; <span class="comment">// 字符串</span>
-<span class="keyword">let</span> age = <span class="number">25</span>;      <span class="comment">// 数字</span>
-<span class="keyword">let</span> isStudent = <span class="keyword">true</span>; <span class="comment">// 布尔值</span>
-<span class="keyword">let</span> nothing = <span class="keyword">null</span>; <span class="comment">// null</span>
-<span class="keyword">let</span> notDefined;    <span class="comment">// undefined</span>
-
-<span class="comment">// 引用数据类型</span>
-<span class="keyword">let</span> person = {     <span class="comment">// 对象</span>
-    firstName: <span class="string">"李"</span>,
-    lastName: <span class="string">"四"</span>,
-    fullName: <span class="keyword">function</span>() {
-        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="keyword">this</span>.lastName;
+public class Main {
+    public static void main(String[] args) {
+        // 创建学生列表
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("张三", 20, "计算机科学"));
+        students.add(new Student("李四", 21, "物理学"));
+        students.add(new Student("王五", 22, "数学"));
+        
+        // 输出学生信息
+        System.out.println("学生信息表:");
+        System.out.println("姓名\t年龄\t专业");
+        for (Student student : students) {
+            System.out.println(student.getName() + "\t" + 
+                             student.getAge() + "\t" + 
+                             student.getMajor());
+        }
     }
-};
+}
 
-<span class="keyword">let</span> fruits = [<span class="string">"苹果"</span>, <span class="string">"香蕉"</span>, <span class="string">"橙子"</span>]; <span class="comment">// 数组</span>
-
-<span class="keyword">function</span> <span class="function">greet</span>() { <span class="comment">// 函数</span>
-    <span class="keyword">return</span> <span class="string">"Hello!"</span>;
-}</code></pre>
-                    <div id="dataTypeOutput" class="output">点击"运行"按钮查看结果</div>
+class Student {
+    private String name;
+    private int age;
+    private String major;
+    
+    public Student(String name, int age, String major) {
+        this.name = name;
+        this.age = age;
+        this.major = major;
+    }
+    
+    // Getter方法
+    public String getName() { return name; }
+    public int getAge() { return age; }
+    public String getMajor() { return major; }
+}</textarea>
+                    <div id="javaOutput" class="output">Java代码运行结果将显示在这里</div>
                 </div>
                 
-                <div class="example">
-                    <h3><i class="fas fa-cogs"></i> 运算符</h3>
-                    <div class="code-header">
-                        <span>运算符示例</span>
-                        <button class="btn-run" onclick="runOperatorExample()"><i class="fas fa-play"></i> 运行</button>
-                    </div>
-                    <pre><code><span class="comment">// 算术运算符</span>
-<span class="keyword">let</span> a = <span class="number">10</span>, b = <span class="number">3</span>;
-<span class="keyword">let</span> sum = a + b;      <span class="comment">// 加法</span>
-<span class="keyword">let</span> difference = a - b; <span class="comment">// 减法</span>
-<span class="keyword">let</span> product = a * b;   <span class="comment">// 乘法</span>
-<span class="keyword">let</span> quotient = a / b;  <span class="comment">// 除法</span>
-<span class="keyword">let</span> remainder = a % b; <span class="comment">// 取模</span>
-
-<span class="comment">// 比较运算符</span>
-<span class="keyword">let</span> isEqual = a == b;        <span class="comment">// 等于</span>
-<span class="keyword">let</span> isStrictEqual = a === b; <span class="comment">// 严格等于</span>
-<span class="keyword">let</span> isGreater = a > b;       <span class="comment">// 大于</span>
-
-<span class="comment">// 逻辑运算符</span>
-<span class="keyword">let</span> andResult = (a > <span class="number">5</span>) && (b < <span class="number">5</span>);  <span class="comment">// 与</span>
-<span class="keyword">let</span> orResult = (a > <span class="number">15</span>) || (b < <span class="number">5</span>); <span class="comment">// 或</span>
-<span class="keyword">let</span> notResult = !(a > <span class="number">5</span>);          <span class="comment">// 非</span></code></pre>
-                    <div id="operatorOutput" class="output">点击"运行"按钮查看结果</div>
+                <h3><i class="fas fa-table"></i> Java 数据表格</h3>
+                <div class="btn-container">
+                    <button class="btn-add" onclick="addJavaRow()"><i class="fas fa-plus"></i> 添加行</button>
+                    <button class="btn-delete" onclick="deleteJavaRow()"><i class="fas fa-trash"></i> 删除行</button>
+                    <button class="btn-clear" onclick="clearJavaTable()"><i class="fas fa-broom"></i> 清空表格</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="javaTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>姓名</th>
+                                <th>年龄</th>
+                                <th>专业</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>张三</td>
+                                <td>20</td>
+                                <td>计算机科学</td>
+                                <td>
+                                    <button onclick="editJavaRow(this)" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        <i class="fas fa-edit"></i> 编辑
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>李四</td>
+                                <td>21</td>
+                                <td>物理学</td>
+                                <td>
+                                    <button onclick="editJavaRow(this)" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        <i class="fas fa-edit"></i> 编辑
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             
             <div class="card">
-                <h2 class="card-title"><i class="fas fa-file-code"></i> JSON 基本格式</h2>
+                <h2 class="card-title"><i class="fas fa-code"></i> C++ 代码编辑器</h2>
                 
-                <div class="example">
-                    <h3><i class="fas fa-sitemap"></i> JSON 数据结构</h3>
+                <div class="editor-container">
                     <div class="code-header">
-                        <span>JSON示例</span>
-                        <button class="btn-json" onclick="runJsonExample()"><i class="fas fa-play"></i> 运行JSON示例</button>
+                        <span>C++代码示例</span>
+                        <button class="btn-run" onclick="runCppCode()"><i class="fas fa-play"></i> 运行C++代码</button>
                     </div>
-                    <pre><code><span class="comment">// JSON 对象</span>
-{
-  <span class="property">"name"</span>: <span class="string">"张三"</span>,
-  <span class="property">"age"</span>: <span class="number">25</span>,
-  <span class="property">"isStudent"</span>: <span class="keyword">true</span>,
-  <span class="property">"hobbies"</span>: [<span class="string">"读书"</span>, <span class="string">"游泳"</span>, <span class="string">"编程"</span>],
-  <span class="property">"address"</span>: {
-    <span class="property">"city"</span>: <span class="string">"北京"</span>,
-    <span class="property">"country"</span>: <span class="string">"中国"</span>
-  },
-  <span class="property">"education"</span>: [
-    {
-      <span class="property">"degree"</span>: <span class="string">"学士"</span>,
-      <span class="property">"major"</span>: <span class="string">"计算机科学"</span>,
-      <span class="property">"year"</span>: <span class="number">2020</span>
-    },
-    {
-      <span class="property">"degree"</span>: <span class="string">"硕士"</span>,
-      <span class="property">"major"</span>: <span class="string">"人工智能"</span>,
-      <span class="property">"year"</span>: <span class="number">2023</span>
+                    <textarea id="cppCode" placeholder="// 在这里编写C++代码&#10;#include <iostream>&#10;using namespace std;&#10;&#10;int main() {&#10;    cout << &quot;Hello, C++!&quot; << endl;&#10;    return 0;&#10;}">#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+struct Student {
+    string name;
+    int age;
+    string major;
+    
+    Student(string n, int a, string m) : name(n), age(a), major(m) {}
+};
+
+int main() {
+    // 创建学生向量
+    vector<Student> students;
+    students.push_back(Student("张三", 20, "计算机科学"));
+    students.push_back(Student("李四", 21, "物理学"));
+    students.push_back(Student("王五", 22, "数学"));
+    
+    // 输出学生信息
+    cout << "学生信息表:" << endl;
+    cout << "姓名\t年龄\t专业" << endl;
+    for (const auto& student : students) {
+        cout << student.name << "\t" 
+             << student.age << "\t" 
+             << student.major << endl;
     }
-  ]
-}</code></pre>
-                    <div id="jsonOutput" class="output">点击"运行JSON示例"按钮查看结果</div>
+    
+    return 0;
+}</textarea>
+                    <div id="cppOutput" class="output">C++代码运行结果将显示在这里</div>
                 </div>
                 
-                <div class="example">
-                    <h3><i class="fas fa-exchange-alt"></i> JSON 解析与序列化</h3>
-                    <div class="code-header">
-                        <span>JSON方法示例</span>
-                        <button class="btn-run" onclick="runJsonMethodsExample()"><i class="fas fa-play"></i> 运行</button>
-                    </div>
-                    <pre><code><span class="comment">// JavaScript对象</span>
-<span class="keyword">let</span> person = {
-  name: <span class="string">"李四"</span>,
-  age: <span class="number">30</span>,
-  hobbies: [<span class="string">"音乐"</span>, <span class="string">"旅行"</span>],
-  address: {
-    city: <span class="string">"上海"</span>,
-    country: <span class="string">"中国"</span>
-  }
-};
-
-<span class="comment">// 将JavaScript对象转换为JSON字符串（序列化）</span>
-<span class="keyword">let</span> jsonString = JSON.stringify(person, <span class="keyword">null</span>, <span class="number">2</span>);
-
-<span class="comment">// 将JSON字符串转换回JavaScript对象（解析）</span>
-<span class="keyword">let</span> parsedPerson = JSON.parse(jsonString);
-
-<span class="comment">// 从JSON字符串中提取特定数据</span>
-<span class="keyword">let</span> jsonData = <span class="string">'{"name":"王五","age":28,"email":"wangwu@example.com"}'</span>;
-<span class="keyword">let</span> user = JSON.parse(jsonData);</code></pre>
-                    <div id="jsonMethodsOutput" class="output">点击"运行"按钮查看结果</div>
+                <h3><i class="fas fa-table"></i> C++ 数据表格</h3>
+                <div class="btn-container">
+                    <button class="btn-add" onclick="addCppRow()"><i class="fas fa-plus"></i> 添加行</button>
+                    <button class="btn-delete" onclick="deleteCppRow()"><i class="fas fa-trash"></i> 删除行</button>
+                    <button class="btn-clear" onclick="clearCppTable()"><i class="fas fa-broom"></i> 清空表格</button>
                 </div>
                 
-                <div class="example">
-                    <h3><i class="fas fa-database"></i> JSON 数组</h3>
-                    <div class="code-header">
-                        <span>JSON数组示例</span>
-                        <button class="btn-run" onclick="runJsonArrayExample()"><i class="fas fa-play"></i> 运行</button>
-                    </div>
-                    <pre><code><span class="comment">// JSON 数组示例</span>
-[
-  {
-    <span class="property">"id"</span>: <span class="number">1</span>,
-    <span class="property">"name"</span>: <span class="string">"产品A"</span>,
-    <span class="property">"price"</span>: <span class="number">99.99</span>,
-    <span class="property">"inStock"</span>: <span class="keyword">true</span>,
-    <span class="property">"tags"</span>: [<span class="string">"新品"</span>, <span class="string">"热卖"</span>]
-  },
-  {
-    <span class="property">"id"</span>: <span class="number">2</span>,
-    <span class="property">"name"</span>: <span class="string">"产品B"</span>,
-    <span class="property">"price"</span>: <span class="number">149.99</span>,
-    <span class="property">"inStock"</span>: <span class="keyword">false</span>,
-    <span class="property">"tags"</span>: [<span class="string">"促销"</span>]
-  },
-  {
-    <span class="property">"id"</span>: <span class="number">3</span>,
-    <span class="property">"name"</span>: <span class="string">"产品C"</span>,
-    <span class="property">"price"</span>: <span class="number">49.99</span>,
-    <span class="property">"inStock"</span>: <span class="keyword">true</span>,
-    <span class="property">"tags"</span>: [<span class="string">"实惠"</span>, <span class="string">"推荐"</span>]
-  }
-]</code></pre>
-                    <div id="jsonArrayOutput" class="output">点击"运行"按钮查看结果</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="content">
-            <div class="card">
-                <h2 class="card-title"><i class="fas fa-play-circle"></i> 代码示例与运行</h2>
-                
-                <div class="example">
-                    <h3><i class="fas fa-bolt"></i> 函数定义与调用</h3>
-                    <div class="code-header">
-                        <span>函数示例</span>
-                        <button class="btn-run" onclick="runFunctionExample()"><i class="fas fa-play"></i> 运行</button>
-                    </div>
-                    <pre><code><span class="comment">// 函数声明</span>
-<span class="keyword">function</span> <span class="function">sayHello</span>(name) {
-    <span class="keyword">return</span> <span class="string">"Hello, "</span> + name + <span class="string">"!"</span>;
-}
-
-<span class="comment">// 函数表达式</span>
-<span class="keyword">const</span> multiply = <span class="keyword">function</span>(a, b) {
-    <span class="keyword">return</span> a * b;
-};
-
-<span class="comment">// 箭头函数 (ES6)</span>
-<span class="keyword">const</span> divide = (a, b) => {
-    <span class="keyword">return</span> a / b;
-};
-
-<span class="comment">// 简洁箭头函数</span>
-<span class="keyword">const</span> square = x => x * x;
-
-<span class="comment">// 函数调用</span>
-<span class="keyword">const</span> greeting = sayHello(<span class="string">"JavaScript"</span>);
-<span class="keyword">const</span> result = multiply(<span class="number">5</span>, <span class="number">3</span>);
-<span class="keyword">const</span> squared = square(<span class="number">7</span>);</code></pre>
-                    <div id="functionOutput" class="output">点击"运行"按钮查看结果</div>
-                </div>
-                
-                <div class="example">
-                    <h3><i class="fas fa-project-diagram"></i> 控制结构</h3>
-                    <div class="code-header">
-                        <span>控制结构示例</span>
-                        <button class="btn-run" onclick="runControlExample()"><i class="fas fa-play"></i> 运行</button>
-                    </div>
-                    <pre><code><span class="comment">// 条件语句</span>
-<span class="keyword">let</span> score = <span class="number">85</span>;
-<span class="keyword">let</span> grade;
-
-<span class="keyword">if</span> (score >= <span class="number">90</span>) {
-    grade = <span class="string">"优秀"</span>;
-} <span class="keyword">else</span> <span class="keyword">if</span> (score >= <span class="number">70</span>) {
-    grade = <span class="string">"良好"</span>;
-} <span class="keyword">else</span> {
-    grade = <span class="string">"需要努力"</span>;
-}
-
-<span class="comment">// for循环</span>
-<span class="keyword">let</span> output = <span class="string">""</span>;
-<span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i <= <span class="number">5</span>; i++) {
-    output += <span class="string">"迭代 "</span> + i + <span class="string">"\n"</span>;
-}
-
-<span class="comment">// 数组迭代</span>
-<span class="keyword">let</span> colors = [<span class="string">"红色"</span>, <span class="string">"绿色"</span>, <span class="string">"蓝色"</span>];
-<span class="keyword">let</span> colorList = <span class="string">""</span>;
-colors.forEach(color => {
-    colorList += <span class="string">"颜色: "</span> + color + <span class="string">"\n"</span>;
-});
-
-<span class="comment">// while循环</span>
-<span class="keyword">let</span> count = <span class="number">3</span>;
-<span class="keyword">let</span> countdown = <span class="string">""</span>;
-<span class="keyword">while</span> (count > <span class="number">0</span>) {
-    countdown += count + <span class="string">"..."</span>;
-    count--;
-}</code></pre>
-                    <div id="controlOutput" class="output">点击"运行"按钮查看结果</div>
-                </div>
-                
-                <div class="example">
-                    <h3><i class="fas fa-code"></i> 尝试编写代码</h3>
-                    <div class="code-header">
-                        <span>代码编辑器</span>
-                    </div>
-                    <textarea id="customCode" style="width: 100%; height: 150px; padding: 15px; border-radius: 8px; font-family: 'Fira Code', monospace; margin-bottom: 15px;" placeholder="// 在这里编写JavaScript代码&#10;// 例如: let message = 'Hello World!';&#10;// 然后点击运行按钮"></textarea>
-                    <div class="btn-container">
-                        <button class="btn-run" onclick="runCustomCode()"><i class="fas fa-play"></i> 运行代码</button>
-                        <button class="btn-clear" onclick="clearCustomCode()"><i class="fas fa-trash"></i> 清除</button>
-                    </div>
-                    <div id="customOutput" class="output">运行结果将显示在这里</div>
+                <div class="table-container">
+                    <table id="cppTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>函数名</th>
+                                <th>参数</th>
+                                <th>返回值</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>calculateSum</td>
+                                <td>int a, int b</td>
+                                <td>int</td>
+                                <td>
+                                    <button onclick="editCppRow(this)" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        <i class="fas fa-edit"></i> 编辑
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>printMessage</td>
+                                <td>string message</td>
+                                <td>void</td>
+                                <td>
+                                    <button onclick="editCppRow(this)" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        <i class="fas fa-edit"></i> 编辑
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
         
         <footer>
-            <p>JavaScript & JSON 学习页面 &copy; 2023 - 设计用于教育目的</p>
+            <p>Java和C++表格编辑器 &copy; 2023 - 设计用于教育目的</p>
         </footer>
     </div>
 
     <script>
-        // 示例1：变量与数据类型 - 运行功能
-        function runVariableExample() {
-            let output = document.getElementById('variableOutput');
-            output.innerHTML = '';
+        // 显示选择的语言
+        function showLanguage(lang) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
             
-            try {
-                // 变量声明
-                var oldVariable = "使用var声明（旧方式）";
-                let changeableVariable = "使用let声明（可更改）";
-                const constantVariable = "使用const声明（常量）";
-                
-                output.innerHTML += `<span style="color: #4caf50">${oldVariable}</span><br>`;
-                output.innerHTML += `<span style="color: #2196f3">${changeableVariable}</span><br>`;
-                output.innerHTML += `<span style="color: #9c27b0">${constantVariable}</span><br>`;
-                
-                // 尝试更改
-                changeableVariable = "已更改的值";
-                output.innerHTML += `<br>更改后: <span style="color: #2196f3">${changeableVariable}</span><br>`;
-                
-                // 尝试更改常量（会报错）
-                output.innerHTML += `<br>尝试更改常量...<br>`;
-                // 这行代码会报错，所以注释掉
-                // constantVariable = "新值"; 
-                output.innerHTML += `<span style="color: #f44336">常量无法更改（上面代码被注释）</span><br>`;
-                
-            } catch (error) {
-                output.innerHTML += `<span style="color: #f44336">错误: ${error.message}</span><br>`;
-            }
-        }
-
-        // 示例2：数据类型 - 运行功能
-        function runDataTypeExample() {
-            let output = document.getElementById('dataTypeOutput');
-            output.innerHTML = '';
-            
-            // 基本数据类型
-            let name = "张三";
-            let age = 25;
-            let isStudent = true;
-            let nothing = null;
-            let notDefined;
-            
-            output.innerHTML += `名字: <span style="color: #4caf50">${name}</span> (${typeof name})<br>`;
-            output.innerHTML += `年龄: <span style="color: #2196f3">${age}</span> (${typeof age})<br>`;
-            output.innerHTML += `是学生: <span style="color: #ff9800">${isStudent}</span> (${typeof isStudent})<br>`;
-            output.innerHTML += `空值: <span style="color: #9e9e9e">${nothing}</span> (${typeof nothing})<br>`;
-            output.innerHTML += `未定义: <span style="color: #607d8b">${notDefined}</span> (${typeof notDefined})<br>`;
-            
-            // 引用数据类型
-            let person = {
-                firstName: "李",
-                lastName: "四",
-                fullName: function() {
-                    return this.firstName + this.lastName;
-                }
-            };
-            
-            let fruits = ["苹果", "香蕉", "橙子"];
-            
-            output.innerHTML += `<br>人物: <span style="color: #e91e63">${person.fullName()}</span> (${typeof person})<br>`;
-            output.innerHTML += `水果: <span style="color: #9c27b0">${fruits.join(', ')}</span> (${typeof fruits})<br>`;
-        }
-
-        // 示例3：运算符 - 运行功能
-        function runOperatorExample() {
-            let output = document.getElementById('operatorOutput');
-            output.innerHTML = '';
-            
-            // 算术运算符
-            let a = 10, b = 3;
-            let sum = a + b;
-            let difference = a - b;
-            let product = a * b;
-            let quotient = a / b;
-            let remainder = a % b;
-            
-            output.innerHTML += `<b>算术运算符:</b><br>`;
-            output.innerHTML += `a + b = <span style="color: #4caf50">${sum}</span><br>`;
-            output.innerHTML += `a - b = <span style="color: #2196f3">${difference}</span><br>`;
-            output.innerHTML += `a * b = <span style="color: #ff9800">${product}</span><br>`;
-            output.innerHTML += `a / b = <span style="color: #9c27b0">${quotient.toFixed(2)}</span><br>`;
-            output.innerHTML += `a % b = <span style="color: #f44336">${remainder}</span><br>`;
-            
-            // 比较运算符
-            let isEqual = a == b;
-            let isStrictEqual = a === b;
-            let isGreater = a > b;
-            
-            output.innerHTML += `<br><b>比较运算符:</b><br>`;
-            output.innerHTML += `a == b: <span style="color: ${isEqual ? '#4caf50' : '#f44336'}">${isEqual}</span><br>`;
-            output.innerHTML += `a === b: <span style="color: ${isStrictEqual ? '#4caf50' : '#f44336'}">${isStrictEqual}</span><br>`;
-            output.innerHTML += `a > b: <span style="color: ${isGreater ? '#4caf50' : '#f44336'}">${isGreater}</span><br>`;
-            
-            // 逻辑运算符
-            let andResult = (a > 5) && (b < 5);
-            let orResult = (a > 15) || (b < 5);
-            let notResult = !(a > 5);
-            
-            output.innerHTML += `<br><b>逻辑运算符:</b><br>`;
-            output.innerHTML += `(a > 5) && (b < 5): <span style="color: ${andResult ? '#4caf50' : '#f44336'}">${andResult}</span><br>`;
-            output.innerHTML += `(a > 15) || (b < 5): <span style="color: ${orResult ? '#4caf50' : '#f44336'}">${orResult}</span><br>`;
-            output.innerHTML += `!(a > 5): <span style="color: ${notResult ? '#4caf50' : '#f44336'}">${notResult}</span><br>`;
-        }
-
-        // 示例4：函数调用 - 运行功能
-        function runFunctionExample() {
-            let output = document.getElementById('functionOutput');
-            output.innerHTML = '';
-            
-            // 函数声明
-            function sayHello(name) {
-                return "Hello, " + name + "!";
-            }
-            
-            // 函数表达式
-            const multiply = function(a, b) {
-                return a * b;
-            };
-            
-            // 箭头函数
-            const divide = (a, b) => {
-                return a / b;
-            };
-            
-            // 简洁箭头函数
-            const square = x => x * x;
-            
-            // 函数调用
-            const greeting = sayHello("JavaScript");
-            const result = multiply(5, 3);
-            const squared = square(7);
-            const division = divide(15, 3);
-            
-            output.innerHTML += `sayHello("JavaScript"): <span style="color: #4caf50">${greeting}</span><br>`;
-            output.innerHTML += `multiply(5, 3): <span style="color: #2196f3">${result}</span><br>`;
-            output.innerHTML += `square(7): <span style="color: #ff9800">${squared}</span><br>`;
-            output.innerHTML += `divide(15, 3): <span style="color: #9c27b0">${division}</span><br>`;
-        }
-
-        // 示例5：控制结构 - 运行功能
-        function runControlExample() {
-            let output = document.getElementById('controlOutput');
-            output.innerHTML = '';
-            
-            // 条件语句
-            let score = 85;
-            let grade;
-            
-            if (score >= 90) {
-                grade = "优秀";
-            } else if (score >= 70) {
-                grade = "良好";
+            if (lang === 'java') {
+                document.querySelectorAll('.tab')[0].classList.add('active');
             } else {
-                grade = "需要努力";
-            }
-            
-            output.innerHTML += `分数: <span style="color: #2196f3">${score}</span><br>`;
-            output.innerHTML += `等级: <span style="color: #4caf50">${grade}</span><br><br>`;
-            
-            // for循环
-            output.innerHTML += `<b>for循环:</b><br>`;
-            for (let i = 1; i <= 5; i++) {
-                output.innerHTML += `迭代 <span style="color: #ff9800">${i}</span><br>`;
-            }
-            
-            // 数组迭代
-            output.innerHTML += `<br><b>数组迭代:</b><br>`;
-            let colors = ["红色", "绿色", "蓝色"];
-            colors.forEach(color => {
-                output.innerHTML += `颜色: <span style="color: #9c27b0">${color}</span><br>`;
-            });
-            
-            // while循环
-            output.innerHTML += `<br><b>while循环:</b><br>`;
-            let count = 3;
-            while (count > 0) {
-                output.innerHTML += `<span style="color: #f44336">${count}</span>...<br>`;
-                count--;
-            }
-            output.innerHTML += `<span style="color: #4caf50">完成!</span><br>`;
-        }
-
-        // JSON示例1：基本JSON对象
-        function runJsonExample() {
-            let output = document.getElementById('jsonOutput');
-            output.innerHTML = '';
-            
-            // JSON对象
-            const person = {
-                "name": "张三",
-                "age": 25,
-                "isStudent": true,
-                "hobbies": ["读书", "游泳", "编程"],
-                "address": {
-                    "city": "北京",
-                    "country": "中国"
-                }
-            };
-            
-            output.innerHTML += `<b>JSON对象内容:</b><br>`;
-            output.innerHTML += `姓名: <span style="color: #4caf50">${person.name}</span><br>`;
-            output.innerHTML += `年龄: <span style="color: #2196f3">${person.age}</span><br>`;
-            output.innerHTML += `是否是学生: <span style="color: #ff9800">${person.isStudent}</span><br>`;
-            output.innerHTML += `爱好: <span style="color: #9c27b0">${person.hobbies.join(', ')}</span><br>`;
-            output.innerHTML += `地址: <span style="color: #e91e63">${person.address.city}, ${person.address.country}</span><br>`;
-            
-            output.innerHTML += `<br><b>JSON字符串:</b><br>`;
-            output.innerHTML += `<span style="color: #795548">${JSON.stringify(person, null, 2)}</span>`;
-        }
-
-        // JSON示例2：JSON方法
-        function runJsonMethodsExample() {
-            let output = document.getElementById('jsonMethodsOutput');
-            output.innerHTML = '';
-            
-            // JavaScript对象
-            let person = {
-                name: "李四",
-                age: 30,
-                hobbies: ["音乐", "旅行"],
-                address: {
-                    city: "上海",
-                    country: "中国"
-                }
-            };
-            
-            // 序列化
-            let jsonString = JSON.stringify(person, null, 2);
-            
-            // 解析
-            let parsedPerson = JSON.parse(jsonString);
-            
-            // 从JSON字符串中提取数据
-            let jsonData = '{"name":"王五","age":28,"email":"wangwu@example.com"}';
-            let user = JSON.parse(jsonData);
-            
-            output.innerHTML += `<b>原始对象:</b><br>`;
-            output.innerHTML += `<span style="color: #4caf50">${JSON.stringify(person)}</span><br><br>`;
-            
-            output.innerHTML += `<b>序列化后的JSON字符串:</b><br>`;
-            output.innerHTML += `<span style="color: #2196f3">${jsonString}</span><br><br>`;
-            
-            output.innerHTML += `<b>解析后的对象:</b><br>`;
-            output.innerHTML += `姓名: <span style="color: #ff9800">${parsedPerson.name}</span><br>`;
-            output.innerHTML += `年龄: <span style="color: #ff9800">${parsedPerson.age}</span><br><br>`;
-            
-            output.innerHTML += `<b>从JSON字符串提取的数据:</b><br>`;
-            output.innerHTML += `姓名: <span style="color: #9c27b0">${user.name}</span><br>`;
-            output.innerHTML += `年龄: <span style="color: #9c27b0">${user.age}</span><br>`;
-            output.innerHTML += `邮箱: <span style="color: #9c27b0">${user.email}</span>`;
-        }
-
-        // JSON示例3：JSON数组
-        function runJsonArrayExample() {
-            let output = document.getElementById('jsonArrayOutput');
-            output.innerHTML = '';
-            
-            // JSON数组
-            const products = [
-                {
-                    "id": 1,
-                    "name": "产品A",
-                    "price": 99.99,
-                    "inStock": true,
-                    "tags": ["新品", "热卖"]
-                },
-                {
-                    "id": 2,
-                    "name": "产品B",
-                    "price": 149.99,
-                    "inStock": false,
-                    "tags": ["促销"]
-                },
-                {
-                    "id": 3,
-                    "name": "产品C",
-                    "price": 49.99,
-                    "inStock": true,
-                    "tags": ["实惠", "推荐"]
-                }
-            ];
-            
-            output.innerHTML += `<b>产品列表:</b><br>`;
-            
-            products.forEach(product => {
-                const statusColor = product.inStock ? '#4caf50' : '#f44336';
-                const statusText = product.inStock ? '有货' : '缺货';
-                
-                output.innerHTML += `<div style="margin-bottom: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px;">`;
-                output.innerHTML += `ID: <span style="color: #2196f3">${product.id}</span><br>`;
-                output.innerHTML += `名称: <span style="color: #ff9800">${product.name}</span><br>`;
-                output.innerHTML += `价格: <span style="color: #9c27b0">¥${product.price}</span><br>`;
-                output.innerHTML += `库存状态: <span style="color: ${statusColor}">${statusText}</span><br>`;
-                output.innerHTML += `标签: <span style="color: #795548">${product.tags.join(', ')}</span>`;
-                output.innerHTML += `</div>`;
-            });
-            
-            output.innerHTML += `<br><b>原始JSON数组:</b><br>`;
-            output.innerHTML += `<span style="color: #607d8b">${JSON.stringify(products, null, 2)}</span>`;
-        }
-
-        // 自定义代码运行功能
-        function runCustomCode() {
-            let output = document.getElementById('customOutput');
-            let code = document.getElementById('customCode').value;
-            output.innerHTML = '';
-            
-            try {
-                // 重写console.log以捕获输出
-                let logMessages = [];
-                const originalConsoleLog = console.log;
-                console.log = function(message) {
-                    logMessages.push(message);
-                    originalConsoleLog.apply(console, arguments);
-                };
-                
-                // 执行代码
-                eval(code);
-                
-                // 恢复console.log
-                console.log = originalConsoleLog;
-                
-                // 显示输出
-                if (logMessages.length > 0) {
-                    output.innerHTML = logMessages.join('<br>');
-                } else {
-                    output.innerHTML = '<span style="color: #9e9e9e">代码已执行，但没有输出内容</span>';
-                }
-            } catch (error) {
-                output.innerHTML = `<span style="color: #f44336">错误: ${error.message}</span>`;
+                document.querySelectorAll('.tab')[1].classList.add('active');
             }
         }
-
-        // 清除自定义代码功能
-        function clearCustomCode() {
-            document.getElementById('customCode').value = '';
-            document.getElementById('customOutput').innerHTML = '运行结果将显示在这里';
+        
+        // Java代码运行功能
+        function runJavaCode() {
+            const output = document.getElementById('javaOutput');
+            output.innerHTML = '正在运行Java代码...\n\n';
+            
+            // 模拟Java代码执行
+            setTimeout(() => {
+                output.innerHTML = '学生信息表:\n';
+                output.innerHTML += '姓名\t年龄\t专业\n';
+                output.innerHTML += '张三\t20\t计算机科学\n';
+                output.innerHTML += '李四\t21\t物理学\n';
+                output.innerHTML += '王五\t22\t数学\n\n';
+                output.innerHTML += 'Java代码执行完成！';
+            }, 1000);
         }
-
+        
+        // C++代码运行功能
+        function runCppCode() {
+            const output = document.getElementById('cppOutput');
+            output.innerHTML = '正在运行C++代码...\n\n';
+            
+            // 模拟C++代码执行
+            setTimeout(() => {
+                output.innerHTML = '学生信息表:\n';
+                output.innerHTML += '姓名\t年龄\t专业\n';
+                output.innerHTML += '张三\t20\t计算机科学\n';
+                output.innerHTML += '李四\t21\t物理学\n';
+                output.innerHTML += '王五\t22\t数学\n\n';
+                output.innerHTML += 'C++代码执行完成！';
+            }, 1000);
+        }
+        
+        // Java表格操作
+        function addJavaRow() {
+            const table = document.getElementById('javaTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            const rowCount = table.rows.length + 1;
+            
+            newRow.innerHTML = `
+                <td>${rowCount}</td>
+                <td>新学生</td>
+                <td>20</td>
+                <td>未指定</td>
+                <td>
+                    <button onclick="editJavaRow(this)" style="padding: 5px 10px; font-size: 0.8rem;">
+                        <i class="fas fa-edit"></i> 编辑
+                    </button>
+                </td>
+            `;
+        }
+        
+        function deleteJavaRow() {
+            const table = document.getElementById('javaTable').getElementsByTagName('tbody')[0];
+            if (table.rows.length > 0) {
+                table.deleteRow(table.rows.length - 1);
+            }
+        }
+        
+        function clearJavaTable() {
+            const table = document.getElementById('javaTable').getElementsByTagName('tbody')[0];
+            table.innerHTML = '';
+        }
+        
+        function editJavaRow(button) {
+            const row = button.parentNode.parentNode;
+            const cells = row.getElementsByTagName('td');
+            
+            const name = prompt("输入姓名:", cells[1].textContent);
+            const age = prompt("输入年龄:", cells[2].textContent);
+            const major = prompt("输入专业:", cells[3].textContent);
+            
+            if (name !== null) cells[1].textContent = name;
+            if (age !== null) cells[2].textContent = age;
+            if (major !== null) cells[3].textContent = major;
+        }
+        
+        // C++表格操作
+        function addCppRow() {
+            const table = document.getElementById('cppTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            const rowCount = table.rows.length + 1;
+            
+            newRow.innerHTML = `
+                <td>${rowCount}</td>
+                <td>newFunction</td>
+                <td>void</td>
+                <td>int</td>
+                <td>
+                    <button onclick="editCppRow(this)" style="padding: 5px 10px; font-size: 0.8rem;">
+                        <i class="fas fa-edit"></i> 编辑
+                    </button>
+                </td>
+            `;
+        }
+        
+        function deleteCppRow() {
+            const table = document.getElementById('cppTable').getElementsByTagName('tbody')[0];
+            if (table.rows.length > 0) {
+                table.deleteRow(table.rows.length - 1);
+            }
+        }
+        
+        function clearCppTable() {
+            const table = document.getElementById('cppTable').getElementsByTagName('tbody')[0];
+            table.innerHTML = '';
+        }
+        
+        function editCppRow(button) {
+            const row = button.parentNode.parentNode;
+            const cells = row.getElementsByTagName('td');
+            
+            const funcName = prompt("输入函数名:", cells[1].textContent);
+            const params = prompt("输入参数:", cells[2].textContent);
+            const returnType = prompt("输入返回类型:", cells[3].textContent);
+            
+            if (funcName !== null) cells[1].textContent = funcName;
+            if (params !== null) cells[2].textContent = params;
+            if (returnType !== null) cells[3].textContent = returnType;
+        }
+        
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('JavaScript & JSON学习页面已加载完成！');
-            
-            // 为所有运行按钮添加点击效果
-            const buttons = document.querySelectorAll('button');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    this.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 100);
-                });
-            });
+            console.log('Java和C++表格编辑器已加载完成！');
         });
     </script>
 </body>
 </html>
-<!-- 在您现有页面的footer之前添加这个导航部分 -->
 <div class="navigation">
     <div class="nav-buttons">
         <button class="nav-btn" onclick="goToNextPage()">
@@ -972,7 +723,7 @@ colors.forEach(color => {
 
 <script>
 function goToNextPage() {
-    window.location.href = 'wmicft-prog.github.io';
+    window.location.href = 'https://wmicft.github.io/';
 }
 
 function goToExternalSite() {
